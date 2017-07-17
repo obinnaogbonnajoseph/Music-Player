@@ -135,7 +135,10 @@ public class MainActivity extends AppCompatActivity {
                 mediaPlayer.pause();
                 mediaPlayer.seekTo(0);
 
-                playPause.toggle();
+                // Toggle the state of the playPause button.
+                if(playPause.isChecked()){
+                    playPause.toggle();
+                }
             }
         });
 
@@ -189,5 +192,3 @@ public class MainActivity extends AppCompatActivity {
         releaseMediaPlayer();
     }
 }
-
-
