@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
     };
 
     /**
-     * Line of commands that start
+     * Line of commands that start the song
      */
     private void startPlayer() {
         // I first request for Audio focus.
@@ -80,8 +80,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         // This gets the audio service so I can implement Audio focus
         am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        // This locates the playPause button
+        final ToggleButton playPause = (ToggleButton) findViewById(R.id.play_pause);
+        // This function initializes my variables
         initializeViews();
 
+        // This takes care of taking my music to current time as seek bar is moved.
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -91,11 +95,13 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
 
+            // This override method is a must. However, I have nothing to do here.
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
                 // Nothing to do here
             }
 
+            // This override method is a must. However, I have nothing to do here.
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 // Nothing to do here too
@@ -104,7 +110,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         // What happens when play_pause button is clicked.
-        final ToggleButton playPause = (ToggleButton) findViewById(R.id.play_pause);
         // Please check what state the button is. On or Off?
         playPause.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -129,6 +134,8 @@ public class MainActivity extends AppCompatActivity {
                 // Then take it back to ground zero. Cool right!
                 mediaPlayer.pause();
                 mediaPlayer.seekTo(0);
+
+                playPause.toggle();
             }
         });
 
